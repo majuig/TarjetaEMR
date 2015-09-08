@@ -19,6 +19,15 @@ class Viaje():
         self._ListaMonto.append(monto)
         self._ListaHora.append(hora)
 
+    def DevolverListaLinea(self):
+        return self._ListaLinea
+
+    def DevolverListaMonto(self):
+        return self._ListaMonto
+
+    def DevolverListaHora(self):
+        return self._ListaHora
+
 
 class Tarjeta():
     def __init__(self):
@@ -41,8 +50,13 @@ class Tarjeta():
         return self._saldo
 
     def ViajesRealizados(self): #Imprimir lineas de los objetos colectivos usados
-        for i in range(0,len(self._MisViajes._ListaLinea)):
-            print("Linea:",self._MisViajes._ListaLinea[i],"\tMonto $"+"%.2f"%self._MisViajes._ListaMonto[i],"\tFecha:",str(self._MisViajes._ListaHora[i])[:-7],"\n")
+        if(len(self._MisViajes._ListaLinea) > 0):
+            for i in range(0,len(self._MisViajes._ListaLinea)):
+                print("Linea:",self._MisViajes._ListaLinea[i],"\tMonto $"+"%.2f"%self._MisViajes._ListaMonto[i],"\tFecha:",str(self._MisViajes._ListaHora[i])[:-7],"\n")
+            return True
+        else:
+            print("No se han realizado viajes con esta tarjeta")
+            return False
 
 class TarjetaComun(Tarjeta):
     def __init__(self):
