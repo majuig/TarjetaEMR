@@ -159,35 +159,3 @@ class TarjetaMedioBoleto(Tarjeta):
                 else:
                     print("Saldo insuficiente.")
                     return False
-
-
-
-Medio = TarjetaMedioBoleto()
-Comun = TarjetaComun()
-
-Comun.Recarga(20)
-Medio.Recarga(7.5)
-Comun.Saldo()
-Medio.Saldo()
-
-L122 = Colectivo("Semtur",122,1)
-L133 = Colectivo("Las Delicias",133,2)
-L144 = Colectivo("Rosario Bus",144,2)
-LK = Colectivo("Semtur","K",2)
-
-print("Comun paga  5.75")
-Comun.PagarBoleto(L133,Ahora)
-print("Medio paga  2.90")
-Medio.PagarBoleto(L133,Ahora)
-print("Comun paga  1.90")
-Comun.PagarBoleto(LK,Ahora)
-print("Comun paga  5.75")
-Comun.PagarBoleto(L144,Ahora)
-print("Medio paga  2.90")
-Medio.PagarBoleto(L133,Ahora)
-print("Comun paga  2.90")
-Comun.PagarBoleto(L133,Ahora)
-print("Medio paga  0.90")
-Medio.PagarBoleto(L122,Ahora)
-Medio.Saldo()
-Medio.ViajesRealizados()
