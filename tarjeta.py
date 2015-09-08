@@ -1,5 +1,6 @@
 from datetime import datetime, timedelta
 
+Ahora = datetime.now()
 
 class Colectivo():
     def __init__(self,empresa,linea,interno):
@@ -24,7 +25,11 @@ class Tarjeta():
         raise NotImplementedError("No se puede crear objetos del tipo Tarjeta")
 
     def Recarga(self,monto): #Recarga segun parametros
-        if(monto < 196):
+
+        if(monto <= 0):
+            print("Imposible cargar ese monto")
+            return
+        elif(monto < 196):
             self._saldo = self._saldo + monto
         elif(monto < 368):
             self._saldo = self._saldo + monto + 34
@@ -33,6 +38,7 @@ class Tarjeta():
 
     def Saldo(self): #Muestra el saldo en pesos
         print ("Saldo actual:","$%.2f" % self._saldo)
+        return self._saldo
 
     def ViajesRealizados(self): #Imprimir lineas de los objetos colectivos usados
         for i in range(0,len(self._MisViajes._ListaLinea)):
@@ -47,8 +53,7 @@ class TarjetaComun(Tarjeta):
         self._banderonga = 1
 
 
-    def PagarBoleto(self,Colectivo):
-        HoraActual = datetime.now()
+    def PagarBoleto(self,Colectivo,HoraActual):
         DifHS = HoraActual - self._UltViaje
 
         if(DifHS < timedelta(minutes=60) and self._UltBondi != Colectivo._linea and self._banderonga == 0): #Transbordo o no
@@ -65,7 +70,7 @@ class TarjetaComun(Tarjeta):
                 return False
         else:
             if(self._saldo > 5.75):
-                self._saldo = self._saldo - 5.75
+                self._saldo = round(self._saldo - 5.75,2)
                 self._MisViajes.AgregarViaje(Colectivo._linea,5.75,HoraActual)
                 self._banderonga = 0
                 print("Pago de $5.75 realizado en linea" , Colectivo._linea , "el" , str(HoraActual)[:-7])
@@ -77,9 +82,6 @@ class TarjetaComun(Tarjeta):
                 return False
 
 
-
-
-
 class TarjetaMedioBoleto(Tarjeta):
     def __init__(self):
         self._saldo = 0
@@ -89,8 +91,7 @@ class TarjetaMedioBoleto(Tarjeta):
         self._Banderonga = 1;
 
 
-    def PagarBoleto(self,Colectivo):
-        HoraActual = datetime.now()
+    def PagarBoleto(self,Colectivo,HoraActual):
         DifHS = HoraActual - self._UltViaje
 
 
@@ -161,18 +162,18 @@ L144 = Colectivo("Rosario Bus",144,2)
 LK = Colectivo("Semtur","K",2)
 
 print("Comun paga  5.75")
-Comun.PagarBoleto(L133)
+Comun.PagarBoleto(L133,Ahora)
 print("Medio paga  2.90")
-Medio.PagarBoleto(L133)
+Medio.PagarBoleto(L133,Ahora)
 print("Comun paga  1.90")
-Comun.PagarBoleto(LK)
+Comun.PagarBoleto(LK,Ahora)
 print("Comun paga  5.75")
-Comun.PagarBoleto(L144)
+Comun.PagarBoleto(L144,Ahora)
 print("Medio paga  2.90")
-Medio.PagarBoleto(L133)
+Medio.PagarBoleto(L133,Ahora)
 print("Comun paga  2.90")
-Comun.PagarBoleto(L133)
+Comun.PagarBoleto(L133,Ahora)
 print("Medio paga  0.90")
-Medio.PagarBoleto(L122)
+Medio.PagarBoleto(L122,Ahora)
 Medio.Saldo()
 Medio.ViajesRealizados()
