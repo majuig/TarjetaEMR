@@ -33,8 +33,10 @@ def test_recarga_Medio():
     assert Medio.Recarga(400) == 492
 
 def test_Pagar_Comun():
-    Comun.PagarBoleto(L122,Ahora)
+    Comun.PagarBoleto(L122,DiaAnterior)
     assert Comun.Saldo() == 486.25
+    Comun.PagarBoleto(L122,HaceUnRatito)
+    assert Comun.Saldo() == 480.50
 
 test_recarga_Comun()
 test_recarga_medio()

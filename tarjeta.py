@@ -28,7 +28,7 @@ class Tarjeta():
 
         if(monto <= 0):
             print("Imposible cargar ese monto")
-            return
+            return False
         elif(monto < 196):
             self._saldo = self._saldo + monto
         elif(monto < 368):
