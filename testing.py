@@ -14,29 +14,35 @@ HaceUnRatito = datetime.now() - timedelta(minutes=30)
 Ahora = datetime.now()
 
 
-def test_recarga_Comun():
+def test_recarga_comun():
     assert Comun.Recarga(-5) == False
     Comun.Recarga(100)
     assert Comun.Saldo() == 100
     Comun.Recarga(200)
     assert Comun.Saldo() == 334
-    Comun.Recarga(66)
-    assert Comun.Recarga(400) == 492
+    Comun.Recarga(466)
+    assert Comun.Saldo() == 892
 
-def test_recarga_Medio():
+def test_recarga_medio():
     assert Medio.Recarga(-5) == False
     Medio.Recarga(100)
     assert Medio.Saldo() == 100
     Medio.Recarga(200)
     assert Medio.Saldo() == 334
-    Medio.Recarga(66)
-    assert Medio.Recarga(400) == 492
+    Medio.Recarga(466)
+    assert Medio.Saldo() == 892
 
-def test_Pagar_Comun():
+def test_pagar_comun():
     Comun.PagarBoleto(L122,DiaAnterior)
-    assert Comun.Saldo() == 486.25
+    assert Comun.Saldo() == 886.25
     Comun.PagarBoleto(L122,HaceUnRatito)
-    assert Comun.Saldo() == 480.50
+    assert Comun.Saldo() == 880.50
+    Comun.PagarBoleto(L122,Ahora) #Acá
+    Comun.Saldo()
+    assert Comun.Saldo() == 878.60
+    Comun,PagarBoleto(L122,Ahora)
+    assert Comun.Saldo() == 872.85
 
-test_recarga_Comun()
+test_recarga_comun()
 test_recarga_medio()
+test_pagar_comun()
