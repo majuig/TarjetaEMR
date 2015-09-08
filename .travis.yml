@@ -1,4 +1,4 @@
 lenguage: python
 python:
   - "3.4"
-script: "testing.py ."
+script: "py.test ."
