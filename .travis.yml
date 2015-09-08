@@ -1,11 +1,4 @@
-<<<<<<< HEAD
-language: python
-python:
-	- "3.4"
-script: "py.test
-=======
 lenguage: python
 python:
   - "3.4"
 script: "testing.py ."
->>>>>>> 159b6ce8042c7d736357c36b096ce17e2a374376
